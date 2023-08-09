@@ -18,6 +18,8 @@ import AmityService from '../../../services/amity/amity.service';
 import { ReactionDataProps, removeReactionAnObject, reactAnObject } from '../../../services/reaction/react.service';
 import { getUserInformation } from '../../../services/user/user.service';
 import { useParams } from 'react-router-dom';
+import { formatDate } from '../../../utils/handler/utils';
+import DateTimePattern from '../../../models/constants/DateTimePattern';
 
 function ThreadDetail() {
     const params = useParams<{ id: string }>();
@@ -36,15 +38,17 @@ function ThreadDetail() {
 
     useEffect(() => {
         AmityService.getAmityService().then(async (_) => {
-console.log("Get post detail")
+            console.log("Get post detail")
             const { data: posts } = await PostRepository.getPostByIds([postID]);
-            
+
             if (posts.length > 0) {
                 const postData = posts[0];
                 console.log(JSON.stringify(postData));
                 const user = await getUserInformation(postData.postedUserId);
                 // update display data
+
                 setPost(postData);
+
                 setPostedUser(user);
                 setReactionCount(postData.reactionsCount)
                 setMyReaction((postData.myReactions ?? []).length > 0)
@@ -99,6 +103,12 @@ console.log("Get post detail")
 
     }
 
+    useEffect(() => {
+        if (post) {
+            const postMetaData = post.metadata as PostMetaData;
+            document.title = postMetaData.title?? "1C:Forum";
+        }
+    }, [post])
 
     return (
         <MainLayout onActionAfter={handleGetPostDetail}>
@@ -116,11 +126,11 @@ console.log("Get post detail")
                                         <div className="flex flex-row items-center mb-5">
                                             <Link href={`/user/profile?id=${postedUser?.userId}`}><Avatar src={postedUser?.avatarCustomUrl} size={'md'} /></Link>
 
-                                            <div className="flex flex-col flex-grow justify-center space-y-2 ml-2">
+                                            <div className="flex flex-col flex-grow justify-start space-y-2 ml-2">
                                                 <Link href={`/user/profile?id=${postedUser?.userId}`}>
-                                                    <h3 className="text-[#3F4354] text-sm font-medium">{postedUser?.displayName}</h3>
+                                                    <h3 className="text-left text-[#3F4354] text-sm font-medium">{postedUser?.displayName}</h3>
                                                 </Link>
-                                                <span className="text-[#8D8080] text-xs">{new Date(post?.createdAt).toLocaleString()}</span>
+                                                <span className="text-left text-[#8D8080] text-xs">{formatDate(post?.updatedAt??'',DateTimePattern.Standard)}</span>
                                             </div>
                                             <FiMoreHorizontal size={24} />
                                         </div>

@@ -9,6 +9,7 @@ type MainLayoutProps = {
     children: React.ReactNode,
     onActionAfter?: () => void,
     hiddenLeft?: boolean,
+    customLeftSection?: JSX.Element,
 }
 
 export default function MainLayout(props: MainLayoutProps) {
@@ -45,8 +46,9 @@ export default function MainLayout(props: MainLayoutProps) {
             }
 
             if (firebaseUser) {
-                handleGetMyCommunities();
-                handleGetMyCommunities();
+                if (!props.hiddenLeft && props.customLeftSection === undefined) {
+                    handleGetMyCommunities();
+                }
             }
 
         })
@@ -60,7 +62,7 @@ export default function MainLayout(props: MainLayoutProps) {
             <div className="p-5 grid grid-cols-6 bg-slate-100">
                 {/* Left bar */}
                 {!props.hiddenLeft && <div className="collapse md:visible md:col-span-1">
-                    <LeftSection communities={myCommunities ?? []} />
+                    {props.customLeftSection ? props.customLeftSection : <LeftSection communities={myCommunities ?? []} />}
                 </div>}
 
 

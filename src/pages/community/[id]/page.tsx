@@ -14,6 +14,7 @@ import PostTargetType from '../../../models/constants/PostTargetType'
 import { auth } from '../../../services/firebase/firebase.service'
 import SlugParams from '../../../models/constants/SlugParams'
 import AmityService from '../../../services/amity/amity.service'
+import CommunityLeftSection from './CommunityLeftSection'
 
 function CommunityDetailPage() {
 
@@ -84,7 +85,7 @@ function CommunityDetailPage() {
     console.log("Render community page")
     //
     return (
-        <MainLayout onActionAfter={handleFetchCommunity}>
+        <MainLayout onActionAfter={handleFetchCommunity} customLeftSection={<CommunityLeftSection community={community} />}>
             {isLoading
                 ? <LoadingIndicator />
                 : <div className="mx-5">
@@ -97,81 +98,6 @@ function CommunityDetailPage() {
                         </div>
                     </div>
                     <div className="p-5 rounded-b-2xl bg-white">
-                        <div className="flex justify-between w-full">
-                            <div>
-                                <h1 className="flex items-center justify-center text-2xl font-semibold">{community?.displayName}</h1>
-                            </div>
-                            <div className="flex justify-between items-center text-lg font-medium gap-3">
-                                <div className="flex rounded-[5px] bg-[#163B57] text-white px-2 py-1 items-center" >
-                                    <AiOutlineUsergroupAdd size={25} />
-                                    <span className="text-sm" onClick={() => { handleJoinCommunity() }}>{joinStatus ? "Rời khỏi nhóm" : "Tham gia nhóm"}</span>
-                                </div>
-                                {/* <div className="flex rounded-[5px] bg-[#C850C0] text-white px-2 py-1 items-center" >
-                                    <AiOutlinePlus size={25} />
-                                    <span className="text-sm">Mời</span>
-                                </div>
-                                <div className="flex rounded-[5px] bg-[#fab64ff8] text-white px-2 py-1 items-center" >
-                                    <AiOutlineSearch size={25} />
-                                    <button className="text-sm" type="button" onClick={onSearchOpen}>Tìm</button>
-                                    <Modal isOpen={isSearchOpen} onClose={onSearchClose} >
-                                        <ModalOverlay />
-                                        <ModalContent>
-                                            <div className="flex flex-row justify-between p-4">
-                                                <div className="w-[80%] h-full bg-[#F4F6F8]">
-                                                    <InputGroup>
-                                                        <Input className="h-full" placeholder="tìm kiếm trong nhóm này...." />
-                                                    </InputGroup>
-                                                </div>
-                                                <div onClick={onSearchClose} className="flex items-center justify-center rounded-2xl p-[6px] bg-[#163B57]">
-                                                    <button>
-                                                        <AiOutlineClose className="text-white" size={32} />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <ModalBody>
-                                                <div className="flex flex-col">
-                                                    <div className="flex justify-start">
-                                                        <h1 className="text-lg font-medium">Tìm kiếm gần đây</h1>
-                                                    </div>
-                                                    <div className="flex justify-between text-slate-400">
-                                                        <div className="flex items-center gap-2">
-                                                            <div><BiSolidTimeFive /></div>
-                                                            <div> Setup workspace for Javascript </div>
-                                                        </div>
-                                                        <div><AiOutlineClose size={25} /></div>
-                                                    </div>
-                                                </div>
-                                            </ModalBody>
-
-                                            <ModalFooter>
-                                                <div className="flex flex-col items-center justify-center mt-3">
-                                                    <div className="text-lg font-semibold text-center">Bạn đang tìm gì à?</div>
-                                                    <div className="text-center">Tìm kiếm bài viết, bình luận hoặc thành viên trong {community?.displayName}.</div>
-                                                </div>
-
-                                            </ModalFooter>
-                                        </ModalContent>
-                                    </Modal>
-
-                                </div> */}
-                            </div>
-                        </div>
-                        <div className="flex flex-col w-2/4 justify-start mt-2">
-                            <div className="flex text-lg font-medium gap-1">
-                                {community?.isPublic ? <FaEarthAsia size={24} /> : <FaLock size={24} />}
-                                <div>{community?.isPublic ? 'Công khai' : 'Nhóm kín'}</div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col mb-5 mt-3">
-                            <div className="text-lg font-medium">
-                                Giới thiệu
-                            </div>
-                            <div>
-                                {community?.description}
-                            </div>
-                        </div>
-                        <div>
-                        </div>
                         {/* <Tabs>
                             <TabList>
                                 <Tab className="font-medium text-base text-[#3F4354]">Threads</Tab>

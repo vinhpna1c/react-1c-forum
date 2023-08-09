@@ -43,17 +43,17 @@ function CommunityItem(props: CommunityItemProps) {
             <div className='flex flex-col ml-3 w-[65%] justify-start'>
                 {props.followCount
                     ? <div className="flex w-full justify-around">
-                        <span className='mb-2 break-all text-xs font-semibold text-gray-600 w-[75%] block overflow-hidden whitespace-nowrap text-ellipsis'>{props.name}</span>
-                        <div className='w-[15%] text-xs rounded button_background flex justify-center items-center'>{props.followCount}</div>
+                        <span className='text-left mb-2 break-all text-xs font-semibold text-gray-600 w-[75%] block overflow-hidden whitespace-nowrap text-ellipsis'>{props.name}</span>
+                        <div className='text-left w-[15%] text-xs rounded button_background flex justify-center items-center'>{props.followCount}</div>
                     </div>
-                    : <span className='w-full mb-2 break-all text-xs font-semibold text-gray-600 block overflow-hidden whitespace-nowrap text-ellipsis'>{props.name}</span>
+                    : <span className='text-left w-full mb-2 break-all text-xs font-semibold text-gray-600 block overflow-hidden whitespace-nowrap text-ellipsis'>{props.name}</span>
                 }
                 {props.memberCount
-                    ? <span className='text-[10px] font-normal text-gray-300 break-all block overflow-hidden whitespace-nowrap text-ellipsis'>{props.memberCount} thành viên</span>
+                    ? <span className='text-left text-[10px] font-normal text-gray-300 break-all block overflow-hidden whitespace-nowrap text-ellipsis'>{props.memberCount} thành viên</span>
                     :
                     props.description
-                        ? <span className='text-[10px] font-normal text-gray-300 break-all block overflow-hidden whitespace-nowrap text-ellipsis'>{props.description}</span>
-                        : <span className='text-[10px] font-normal text-gray-300 break-all block overflow-hidden whitespace-nowrap text-ellipsis'>{props.postCount} bài đăng</span>
+                        ? <span className='text-left  text-[10px] font-normal text-gray-300 break-all block overflow-hidden whitespace-nowrap text-ellipsis'>{props.description}</span>
+                        : <span className='text-left text-[10px] font-normal text-gray-300 break-all block overflow-hidden whitespace-nowrap text-ellipsis'>{props.postCount} bài đăng</span>
                 }
 
             </div>

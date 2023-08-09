@@ -14,11 +14,21 @@ const uploadSingleFileToAmity = async (file: File, type: UploadFileType) => {
         default:
             return (await FileRepository.createFile(formData)).data[0];
     }
+}
 
-
+const getFileUrlById = async (fileID: string) => {
+    if(fileID.length===0){
+        return undefined;
+    }
+    const file = await FileRepository.getFile(fileID);
+    if (file) {
+        return file.data.fileUrl;
+    }
+    return undefined;
 }
 
 
 export {
     uploadSingleFileToAmity,
+    getFileUrlById,
 }
