@@ -4,13 +4,13 @@ import { auth } from "../firebase/firebase.service";
 import { Client, CommunityRepository } from "@amityco/ts-sdk";
 
 const getAllCommunity = async () => {
-    const result = await HttpService.get(`/communities`)
-    return JSON.parse(result?.data) as Community[]
+    // const result = await HttpService.get(`/communities`)
+    // return JSON.parse(result?.data) as Community[]
 }
 
 const getCommunityByID = async (Code: number | string, UUID: string | undefined) => {
-    const result = await HttpService.get(`/communitydetail?CommunityID=${Code}${UUID ? `&UUID=${UUID}` : ""}`)
-    return JSON.parse(result?.data)
+    // const result = await HttpService.get(`/communitydetail?CommunityID=${Code}${UUID ? `&UUID=${UUID}` : ""}`)
+    // return JSON.parse(result?.data)
 }
 const getMyCommunites = async () => {
     // not auth handling
@@ -18,17 +18,17 @@ const getMyCommunites = async () => {
         return []
     }
     const uuid = auth.currentUser.uid;
-    const result = await HttpService.get(`/usercommunities?UUID=${uuid}`);
-    if (result?.status === 200) {
-        return JSON.parse(result.data) as Community[];
-    }
+    // const result = await HttpService.get(`/usercommunities?UUID=${uuid}`);
+    // if (result?.status === 200) {
+    //     return JSON.parse(result.data) as Community[];
+    // }
     //return if failed
     return []
 }
 
 const getCommunityPosts = async (Code: number | string, UUID: string | undefined) => {
-    const result = await HttpService.get(`/community/post?CommunityID=${Code}${UUID ? `&UUID=${UUID}` : ""}`)
-    return JSON.parse(result?.data)
+    // const result = await HttpService.get(`/community/post?CommunityID=${Code}${UUID ? `&UUID=${UUID}` : ""}`)
+    // return JSON.parse(result?.data)
 }
 
 const createCommunityJoin = async () => {

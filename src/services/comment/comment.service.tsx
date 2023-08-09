@@ -4,13 +4,15 @@ import { CommentRepository } from "@amityco/ts-sdk";
 
 const COMMENT_PATH = "/comment";
 
-const createCommentReact = async (commentid: number | string, uuid: string | null) => {
-    const result = await HttpService.post(`/commentreact`, { body: { CommentID: commentid, UUID: uuid } })
-    return JSON.parse(result?.data)
-}
+// const httpService = new HttpService();
+
+// const createCommentReact = async (commentid: number | string, uuid: string | null) => {
+//     const result = await httpService.post(`/commentreact`, { body: { CommentID: commentid, UUID: uuid } })
+//     return JSON.parse(result?.data)
+// }
 
 const createComment = async (payload: CreateCommentDTO) => {
-    // const result = await HttpService.post(COMMENT_PATH, { body: payload });
+    // const result = await httpService.post(COMMENT_PATH, { body: payload });
     // return result?.status === 200;
     const comment = await CommentRepository.createComment({
         data: {
@@ -24,6 +26,6 @@ const createComment = async (payload: CreateCommentDTO) => {
 }
 
 export {
-    createCommentReact,
+    // createCommentReact,
     createComment
 }

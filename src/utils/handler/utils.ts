@@ -1,8 +1,10 @@
 // small processing bussiness or basic logic
 
+import { useLocation } from "react-router-dom";
 import { CommentData } from "../../models/comment/comment";
 import DateTimePattern from '../../models/constants/DateTimePattern';
 import moment from "moment";
+import React from "react";
 
 const countComments = (commentList: CommentData[]) => {
     let count = 0;
@@ -21,8 +23,14 @@ const formatDate = (val: string | number, pattern: DateTimePattern) => {
     return moment(val).format(pattern.toString());
 }
 
+const useSearchParams = () => {
+    const { search } = useLocation();
+    return React.useMemo(() => new URLSearchParams(search), [search])
+}
+
 export {
     countComments,
     formatDateInput,
     formatDate,
+    useSearchParams,
 };

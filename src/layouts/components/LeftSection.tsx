@@ -37,21 +37,21 @@ export default function LeftSection(props: LeftSectionProps) {
         <div className="flex flex-col gap-5">
             <CardLayout>
                 <div className='flex flex-col space-y-3 m-2 '>
-                    {featureList.map((community, index) => {
+                    {featureList.map((feature, index) => {
                         if (index == 2) {
                             return (
-                                isAuthenticated && <CommunityItem {...community} key={index} followCount={props.communities.length} />
+                                isAuthenticated && <CommunityItem {...feature} key={index} followCount={props.communities.length} />
                             )
                         }
                         if (index == 0) {
                             return (
                                 <Link key={index} to="/news">
-                                    <CommunityItem {...community} key={index} />
+                                    <CommunityItem {...feature} key={index} />
                                 </Link>
                             )
                         }
                         return (
-                            <CommunityItem {...community} key={index} />
+                            <CommunityItem {...feature} key={index} />
                         )
                     }
                     )}

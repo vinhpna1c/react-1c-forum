@@ -28,13 +28,12 @@ export default function HomePage() {
         },
       );
       unsub();
-      console.log(posts, "hehehehe");
     }
   
     useEffect(() => {
   
       // const unsub = PostRepository.getPosts(
-      //   { targetId: process.env.DEFAULT_COMMUNITY_ID!, targetType: "community" },
+      //   { targetId: process.env.REACT_APP_DEFAULT_COMMUNITY_ID!, targetType: "community" },
       //   ({ data: posts, onNextPage, hasNextPage, loading, error }) => {
       //     setPosts(posts);
       //     setIsLoading(false);
@@ -70,7 +69,7 @@ export default function HomePage() {
                 return (
                   <PostsCard
                     key={index}
-                    Code={item.postId} reacted={item.myReactions?.length == 0 ? false : true}
+                    Code={item.postId} reacted={item.myReactions?.length === 0 ? false : true}
                     postedUser={item.postedUserId}
                     content={content?.text} postedAt="6" timePostedAt="h"
                     totalComment={item.commentsCount} ReactionCount={item.reactionsCount}

@@ -15,8 +15,9 @@ import { Avatar, Button, Input, InputGroup, InputRightElement, Menu, MenuButton,
 
 import { User } from "firebase/auth";
 import NavigationButton from '../../components/Button/NavigationButton';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { auth } from '../../services/firebase/firebase.service';
+import { logOut } from '../../services/auth/auth.service';
 
 
 const navs = [
@@ -39,11 +40,11 @@ type searchData = {
 }
 
 export default function Header() {
-
+    const navigation = useHistory();
     const [currentIndex, setCurrentIndex] = useState(0);
     // const [authUser,setAuthUser]=useState<User|null>(null);
     // const { firebaseUser, user } = useAuthContext()??{};
-    
+
     const firebaseUser = auth.currentUser;
     const user = undefined;
     const [input, setInput] = useState('');
@@ -59,15 +60,13 @@ export default function Header() {
 
     }
 
-    function logOut(): void {
-        
-    }
+
 
     return (
         <div className="flex p-5 items-center">
             <Link to={"/"}>
                 <div className="flex items-center">
-                    <Image width={48} height={48} className="object-contain" src={"/images/1c_logo.jpg"} alt={"1c_logo.jpg"} />
+                    <img className="w-12 h-12 object-contain" src={"/images/1c_logo.jpg"} alt={"1c_logo.jpg"} />
                     <span className="text-2xl text-gray-600 font-semibold">1C Forum</span>
                 </div>
             </Link>
@@ -96,7 +95,10 @@ export default function Header() {
                         </MenuButton>
                         <MenuList>
                             <MenuItem><Link to={"/user/profile?id=" + firebaseUser.uid}>Trang cá nhân</Link></MenuItem>
-                            <MenuItem onClick={() => logOut()}>Đăng xuất</MenuItem>
+                            <MenuItem onClick={async () => {
+                                await logOut()
+                                navigation.go(0);
+                            }}>Đăng xuất</MenuItem>
                             {/* <MenuItem>Create a Copy</MenuItem> */}
                             {/* <MenuItem>Mark as Draft</MenuItem> */}
                             {/* <MenuItem>Delete</MenuItem> */}

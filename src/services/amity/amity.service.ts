@@ -38,22 +38,33 @@ class AmityService {
     }
 
     static async getAmityService(option?: { isSignIn?: boolean }) {
-        if (AmityService.amityService == undefined) {
-            const firebaseUser = auth.currentUser;
-            const uid = firebaseUser?.uid;
+        const firebaseUser = auth.currentUser;
+        const uid = firebaseUser?.uid ?? 'default_user';
 
-            // create amity service
-            AmityService.amityService = new AmityService(uid ?? 'default_user');
+
+        if (AmityService.amityService == undefined) {
+
+            AmityService.amityService = new AmityService(uid);
             await AmityService.amityService.initAmity();
 
             if (option?.isSignIn) {
                 await AmityService.amityService.handleAdditionalInformation();
             }
         }
+        if (uid && AmityService.amityService!.username != uid) {
+            AmityService.amityService!.username = uid;
+            await Client.logout();
+            AmityService.amityService.login();
+        }
+
         return AmityService.amityService;
     }
 
-    private async login() {
+    static removeAmityService() {
+        AmityService.amityService = undefined;
+    }
+
+    public async login() {
         await Client.login({ userId: this.username }, AmityService.sessionHandler);
     }
 

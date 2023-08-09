@@ -36,7 +36,7 @@ function CommunityCard(props: CommunityCardProps) {
             }
 
         })
-    }, []);
+    }, [Avatar]);
 
     const handleJoinCommunity = async () => {
         joinStatus

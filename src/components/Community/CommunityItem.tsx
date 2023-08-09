@@ -11,7 +11,8 @@ type CommunityItemProps = {
     memberCount?: number | string,
     description?: string,
     followCount?: number | string,
-    postCount?: number | string
+    postCount?: number | string,
+    imgUrl?:string,
 }
 
 function CommunityItem(props: CommunityItemProps) {
@@ -21,7 +22,7 @@ function CommunityItem(props: CommunityItemProps) {
     useEffect(() => {
         try {
             if(Avatar){
-                FileRepository.getFile(Avatar ?? "").then((item) => {
+                FileRepository.getFile(Avatar).then((item) => {
                     setImgURL(item.data.fileUrl + "?size=large")
                 });
             }
@@ -37,7 +38,7 @@ function CommunityItem(props: CommunityItemProps) {
         <div className='flex items-center justify-between w-full'>
             {props.Avatar
                 ? <img className='w-8 h-8 object-cover rounded' src={imgURL} />
-                : <img className='w-8 h-8 object-cover rounded' src="https://scontent.fsgn5-12.fna.fbcdn.net/v/t1.6435-9/84481500_488747641823180_857236512633257984_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8631f5&_nc_ohc=caQIzw5X1bIAX-5KyQr&_nc_ht=scontent.fsgn5-12.fna&oh=00_AfBznvGMt3d62w76I5ktYbt-CyD9YhR4uSEKPjMT2W2pSg&oe=64CDCD86" />
+                : <img className='w-8 h-8 object-cover rounded' src={props.imgUrl??'https://cdn-icons-png.flaticon.com/512/7824/7824721.png'} />
             }
             <div className='flex flex-col ml-3 w-[65%] justify-start'>
                 {props.followCount

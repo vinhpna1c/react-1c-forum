@@ -3,6 +3,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, browserLocalPersist
 import { auth } from "../firebase/firebase.service";
 import { createUser, } from "../user/user.service";
 import AmityService from '../amity/amity.service';
+import { Client } from '@amityco/ts-sdk';
 
 enum SignInStatus {
     SUCCESS,
@@ -74,8 +75,7 @@ const signIn = async (method: SignInMethod, data?: { email: string, password: st
     // else {
     //     setUser(user_1C);
     // }
-    // handle amity information
-    await AmityService.getAmityService({ isSignIn: true });
+    // handle amity information    
 
     return SignInStatus.SUCCESS;
 }
@@ -104,7 +104,9 @@ const signInWithGoogle = async () => {
 // sign in with facebook
 
 const logOut = async () => {
+    await Client.logout();
     await auth.signOut();
+    
 }
 
 const signUpFirebase = async (email: string, password: string) => {

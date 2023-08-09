@@ -1,0 +1,14 @@
+._header_button {
+    background: var(--background-main);
+    color: var(--secondary-color-background, #FFF);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    line-height: 20px;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -36,19 +36,20 @@ export default function MainLayout(props: MainLayoutProps) {
 
     useEffect(() => {
 
-        //init amity service if there is any action need amity 
-        // AmityService.getAmityService().then((_) => {
-        //     console.log("Done init data!")
-        //     // call callback after init amity
-        //     if (onActionAfter) {
-        //         onActionAfter!();
-        //     }
+        // init amity service if there is any action need amity 
+        AmityService.getAmityService().then((_) => {
+            console.log("Done init data!")
+            // call callback after init amity
+            if (onActionAfter) {
+                onActionAfter!();
+            }
 
-        //     if (firebaseUser) {
-        //         handleGetMyCommunities();
-        //     }
+            if (firebaseUser) {
+                handleGetMyCommunities();
+                handleGetMyCommunities();
+            }
 
-        // })
+        })
     }, [])
     return (
 

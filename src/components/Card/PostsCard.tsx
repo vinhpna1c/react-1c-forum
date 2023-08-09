@@ -10,6 +10,7 @@ import TagDiv from '../Tag/TagDiv';
 import { Tooltip } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
+
 type PostItemProps = {
     //Amity
     thumbnail?: string,
@@ -51,11 +52,11 @@ const PostsCard = (props: PostItemProps) => {
 
             </Link>
             <div className="flex flex-col flex-grow justify-between ml-3">
-                <div className='flex flex-col'>
+                <div className='flex flex-col items-start'>
                     {/* content */}
                     <Link to={path}>
                         <Tooltip label={title} color={'black'} bg={'gray.200'}>
-                            <p className="font-sans text-lg font-semibold max-h-[60px] text-ellipsis overflow-hidden">{title}</p>
+                            <p className="font-sans text-lg text-left font-semibold max-h-[60px] text-ellipsis overflow-hidden">{title}</p>
                         </Tooltip>
 
                     </Link>
