@@ -13,14 +13,14 @@ type CPMProps = {
 }
 
 function AddPostSection(props: CPMProps) {
-    const {postType, targetID, callback} = props
+    const { postType, targetID, callback } = props
     const { isOpen, onOpen, onClose } = useDisclosure();
     const CurrentUser = auth.currentUser;
     const handleCallBack = () => {
         if (callback) {
             callback!();
-            onClose();
         }
+        onClose();
     }
 
     return (

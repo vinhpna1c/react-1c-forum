@@ -1,5 +1,5 @@
 
-import { ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Input } from "@chakra-ui/react";
+import { ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Input, useToast } from "@chakra-ui/react";
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import EditorTool from "./EditorTool";
@@ -17,6 +17,7 @@ import { uploadSingleFileToAmity } from "../../services/file/file.service";
 import { auth } from "../../services/firebase/firebase.service";
 import { CreatePostDTO } from "../../models/post/post.dto";
 import { lowlight } from "lowlight";
+import { createPost } from "../../services/post/post.service";
 
 
 
@@ -29,6 +30,7 @@ type CPMProps = {
 
 function CreatePostModal(props: CPMProps) {
     const { callback, targetID, postType } = props
+    const toast = useToast();
     // console.log(communityID);
 
     //set up editor
@@ -57,6 +59,7 @@ function CreatePostModal(props: CPMProps) {
 
     const submitPost = async () => {
         const currentUser = auth.currentUser;
+        console.log("call submit post")
         if (currentUser === null) {
             return false;
         }
@@ -89,9 +92,23 @@ function CreatePostModal(props: CPMProps) {
             description,
             tagArray: tags
         };
-        console.log("Post data: "+JSON.stringify(postData))
-        // const post = await createPost(postData);
-        // console.log("Created post: \n" + JSON.stringify(post));
+        console.log("Post data: " + JSON.stringify(postData))
+
+        const post = await createPost(postData);
+
+        if (post) {
+            console.log("Created post: \n" + JSON.stringify(post));
+            toast({
+                //title: 'Account created.',
+                description: "Create post successfully",
+                status: 'success',
+                duration: 750,
+                isClosable: true,
+                position: 'top',
+            })
+            return true;
+        }
+        return false;
     }
 
     const uploadFile = (event: ChangeEvent<HTMLInputElement>) => {

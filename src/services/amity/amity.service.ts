@@ -57,6 +57,9 @@ class AmityService {
             AmityService.amityService.login();
         }
 
+        console.log("Curreent user id: " + uid)
+        console.log("Curreent user: " + JSON.stringify(Client.getActiveUser()))
+
         return AmityService.amityService;
     }
 

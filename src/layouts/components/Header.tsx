@@ -2,18 +2,15 @@
 
 import { GoHomeFill } from 'react-icons/go';
 import { AiFillMessage, AiOutlineCaretDown } from 'react-icons/ai';
-import { BiSolidCalendarEvent, BiPodcast } from 'react-icons/bi';
+import { BiPodcast } from 'react-icons/bi';
 import { HiMiniUserGroup } from 'react-icons/hi2';
-import { PiMicrophoneStageFill } from 'react-icons/pi';
-import { VscBellDot, VscBell } from 'react-icons/vsc';
+import { VscBell } from 'react-icons/vsc';
 import { RiSearchLine } from 'react-icons/ri'
 import { FaHashtag } from 'react-icons/fa'
-import { Image } from '@chakra-ui/react';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Avatar, Button, Input, InputGroup, InputRightElement, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 
 
-import { User } from "firebase/auth";
 import NavigationButton from '../../components/Button/NavigationButton';
 import { Link, useHistory } from 'react-router-dom';
 import { auth } from '../../services/firebase/firebase.service';

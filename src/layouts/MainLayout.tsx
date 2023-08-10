@@ -17,6 +17,7 @@ export default function MainLayout(props: MainLayoutProps) {
     const [communities, setCommunities] = useState<Amity.Community[]>([])
     // const { sideData, setSideData } = useAuthContext();
     const firebaseUser = auth.currentUser;
+    console.log("Current firebase user :" + firebaseUser?.uid);
     const [myCommunities, setMyCommunities] = useState<Amity.Community[] | undefined>([]);
 
     const handleGetMyCommunities = () => {
@@ -40,11 +41,6 @@ export default function MainLayout(props: MainLayoutProps) {
         // init amity service if there is any action need amity 
         AmityService.getAmityService().then((_) => {
             console.log("Done init data!")
-            // call callback after init amity
-            if (onActionAfter) {
-                onActionAfter!();
-            }
-
             if (firebaseUser) {
                 if (!props.hiddenLeft && props.customLeftSection === undefined) {
                     handleGetMyCommunities();
@@ -52,7 +48,7 @@ export default function MainLayout(props: MainLayoutProps) {
             }
 
         })
-    }, [])
+    }, [firebaseUser])
     return (
 
         <div className="min-h-full">
